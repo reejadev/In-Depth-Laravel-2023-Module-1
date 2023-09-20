@@ -43,7 +43,7 @@ Route::post('/auth/redirect', function () {
 })->name('login.github');
 
 Route::get('/auth/callback', function () {
-    $user = Socialite::driver('github')->user();
+    $user = Socialite::driver('github')->stateless()->user();
     $user = User::firstOrCreate(['email' => $user->email], [
         'name'     => $user->name,
         'password' => 'password',
